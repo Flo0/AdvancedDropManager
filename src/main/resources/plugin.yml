@@ -1,0 +1,6 @@
+name: AdvancedDropManager
+version: ${project.version}
+main: com.gestankbratwurst.advanceddropmanager.AdvancedDropManager
+api-version: 1.13
+authors: [Gestankbratwurst]
+description: Used to manage all drops on the server.
