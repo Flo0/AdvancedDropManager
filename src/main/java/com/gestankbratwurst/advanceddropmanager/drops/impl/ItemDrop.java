@@ -6,6 +6,8 @@ import com.gestankbratwurst.advanceddropmanager.drops.abstraction.IDrop;
 import com.gestankbratwurst.advanceddropmanager.guis.DropGUI;
 import com.gestankbratwurst.advanceddropmanager.guis.ItemDropGUI;
 import com.google.gson.JsonObject;
+import net.crytec.libs.commons.utils.UtilInv;
+import net.crytec.libs.commons.utils.UtilPlayer;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -22,7 +24,8 @@ import org.bukkit.inventory.ItemStack;
 public class ItemDrop implements IDrop<ItemDrop> {
 
   public ItemDrop(JsonObject jsonObject) {
-
+    // TODO replace with single
+    this.itemStack = UtilInv.itemStackArrayFromBase64(jsonObject.get("Item").getAsString())[0];
   }
 
   public ItemDrop() {
@@ -59,11 +62,15 @@ public class ItemDrop implements IDrop<ItemDrop> {
 
   @Override
   public Class<ItemDrop> getImplementingClass() {
-    return null;
+    return this.getImplementingClass();
   }
 
   @Override
   public JsonObject getJsonData() {
-    return null;
+    JsonObject json = new JsonObject();
+    // TODO replace with single
+    String base64Item = UtilInv.itemStackArrayToBase64(new ItemStack[]{this.itemStack});
+    json.addProperty("Item", base64Item);
+    return json;
   }
 }
